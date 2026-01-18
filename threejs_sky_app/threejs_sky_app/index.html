@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SNIa + Galaksi 3D Viewer</title>
+  <style>
+    html, body { height:100%; margin:0; overflow:hidden; background:#000; color:#eee; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    #left {
+      position:fixed; left:12px; top:12px; width:360px; z-index:10;
+      background:rgba(20,20,20,0.8); border:1px solid rgba(255,255,255,0.12);
+      border-radius:14px; padding:12px; backdrop-filter: blur(6px);
+    }
+    #right {
+      position:fixed; right:12px; top:12px; width:420px; z-index:10;
+      background:rgba(20,20,20,0.8); border:1px solid rgba(255,255,255,0.12);
+      border-radius:14px; padding:12px; backdrop-filter: blur(6px);
+    }
+    h3 { margin:6px 0 8px; font-size:13px; }
+    .row { display:flex; gap:8px; margin:8px 0; align-items:center; }
+    select, input, button {
+      width:100%; padding:7px 8px; border-radius:10px;
+      background:rgba(255,255,255,0.08); color:#eee;
+      border:1px solid rgba(255,255,255,0.15);
+    }
+    button { cursor:pointer; }
+    #snlist { max-height:240px; overflow:auto; border-top:1px solid rgba(255,255,255,0.12); margin-top:8px; padding-top:6px; }
+    .snitem { padding:6px 6px; border-radius:8px; cursor:pointer; }
+    .snitem:hover { background:rgba(255,255,255,0.08); }
+    #cutout { width:100%; height:280px; object-fit:contain; border-radius:10px; border:1px solid rgba(255,255,255,0.12); }
+    #meta { white-space:pre-line; font-size:12px; margin-top:8px; color:#ddd; }
+    #tooltip {
+      position:fixed; pointer-events:none; z-index:20;
+      padding:8px 10px; background:rgba(15,15,15,0.95);
+      border:1px solid rgba(255,255,255,0.12); border-radius:10px;
+      font-size:12px; display:none;
+    }
+    canvas { display:block; }
+  </style>
+</head>
+<body>
+  <div id="left">
+    <h3>SNIa Kontroller</h3>
+<div class="row">
+      <select id="mode">
+        <option value="sky">Sky view</option>
+        <option value="focus">Odaklı view</option>
+      </select>
+    </div>
+<div class="row">
+  <select id="showLayer">
+    <option value="both">SNIa + Galaksi</option>
+    <option value="sn">Sadece SNIa</option>
+    <option value="gal">Sadece Galaksi</option>
+  </select>
+</div>
+    <div class="row">
+      <select id="band">
+        <option value="r">r</option><option value="g">g</option><option value="i">i</option><option value="u">u</option><option value="z">z</option>
+      </select>
+    </div>
+    <div class="row">
+      <input id="bandBright" type="range" min="10" max="100" value="70" />
+    </div>
+    <div class="row">
+      <button id="look">Sky: Bakışı kilitle (L)</button>
+      <button id="reset">Reset (R)</button>
+    </div>
+          <h3>SNIa Listesi</h3>
+    <div id="snlist"></div>
+  </div>
+
+  <div id="right">
+    <h3>Seçili obje</h3>
+    <img id="cutout" />
+    <div id="meta">Bir SNIa veya galaksi seç.</div>
+  </div>
+
+  <div id="tooltip"></div>
+
+  <script type="module" src="./app.js?v=5"></script>
+</body>
+</html>
